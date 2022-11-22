@@ -17,8 +17,8 @@ app.use(taskRouter);
 // Production URL
 // const CONNECTION_URL = "mongodb+srv://ahmed:eid199963@cluster0.h575og5.mongodb.net/?retryWrites=true&w=majority"
 
-const CONNECTION_URL = "mongodb://127.0.0.1:27017/todo-app-backend"
-// const CONNECTION_URL = "mongodb+srv://ahmed:eid199963@cluster0.h575og5.mongodb.net/?retryWrites=true&w=majority"
+// const CONNECTION_URL = "mongodb://127.0.0.1:27017/todo-app-backend"
+const CONNECTION_URL = "mongodb+srv://ahmed:eid199963@cluster0.h575og5.mongodb.net/?retryWrites=true&w=majority"
 
 const PORT = process.env.PORT || 3000
 
