@@ -9,7 +9,11 @@ const app = express()
 app.use(express.json())
 app.use(userRouter);
 app.use(taskRouter);
-app.use(cors())
+///////////////////////////////////
+// dont use in production version
+// app.use(cors())
+///////////////////////////////////
+
 // Production URL
 // const CONNECTION_URL = "mongodb+srv://ahmed:eid199963@cluster0.h575og5.mongodb.net/?retryWrites=true&w=majority"
 
