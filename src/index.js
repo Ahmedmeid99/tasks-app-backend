@@ -6,12 +6,12 @@ import taskRouter from "./routes/task.js";
 
 const app = express()
 
+app.use(cors())
 app.use(express.json())
 app.use(userRouter);
 app.use(taskRouter);
 ///////////////////////////////////
 // dont use in production version
-// app.use(cors())
 ///////////////////////////////////
 
 // Production URL
