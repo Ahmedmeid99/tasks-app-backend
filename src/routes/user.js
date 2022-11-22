@@ -32,7 +32,7 @@ router.post('/api/login', async (req, res) => {
     const user = await User.findOne({ email })
     const ispasswordValid = await bcrypt.compare(password, user.password)
     if (user && ispasswordValid) {
-        const token = await jwt.sign({ email, password }, process.env.JWD_SECRET)
+        const token = jwt.sign({ email, password }, process.env.JWT_SECRET)
         user.token = token;
         user.save()
         return res.status(200).json({ user: user, token, status: 'ok' })
