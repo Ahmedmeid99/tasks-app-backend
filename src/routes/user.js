@@ -29,16 +29,21 @@ router.post('/api/register', async (req, res) => {
 router.post('/api/login', async (req, res) => {
     const email = req.body.email
     const password = req.body.password
-    const user = await User.findOne({ email })
-    const ispasswordValid = await bcrypt.compare(password, user.password)
-    if (ispasswordValid) {
-        const token = jwt.sign({ email, password }, process.env.JWT_SECRET)
-        user.token = token;
-        user.save()
-        return res.status(200).json({ user: user, token, status: 'ok' })
-    } else {
-        return res.status(400).json({ user: false, status: 'error' })
+    try {
+        const user = await User.findOne({ email })
+        const ispasswordValid = await bcrypt.compare(password, user.password)
+        if (ispasswordValid) {
+            const token = jwt.sign({ email, password }, 'process.env.JWT_SECRET')
+            user.token = token;
+            user.save()
+            res.status(200).json({ user: { email, name: user.name }, token, status: 'ok' })
+        } else {
+            res.status(400).json({ user: false, status: 'error' })
+        }
+    } catch (e) {
+        res.status(400).json({ user: false, status: 'error' })
     }
+
 })
 
 //////////////////////////////////////////
@@ -46,7 +51,7 @@ router.post('/api/checklogin', async (req, res) => {
     const token = req.header("Authorization").replace("Bearer ", "");
     if (token) {
         //transform token to user object
-        const decoded = jwt.verify(token, process.env.JWD_SECRET)
+        const decoded = jwt.verify(token, 'process.env.JWD_SECRET')
         const user = await User.findOne({ _id: decoded.id, "tokens.token": token })
         return res.status(200).json({ user: user, token, status: 'ok' })
     }
