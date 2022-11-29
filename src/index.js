@@ -10,8 +10,11 @@ app.use(cors())
 app.use(express.json())
 app.use(userRouter);
 app.use(taskRouter);
+
 ///////////////////////////////////
-// dont use in production version
+app.get('/', (req, res) => {
+  res.send('Hello')
+})
 ///////////////////////////////////
 
 // Production URL
