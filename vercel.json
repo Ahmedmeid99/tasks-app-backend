@@ -3,14 +3,14 @@
   "name": "tasks-app",
   "builds": [
     {
-      "src": "index.js",
-      "use": "@now/node"
+      "src": "./src/index.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/src/index.js"
+      "dest": "/"
     }
   ]
 }
